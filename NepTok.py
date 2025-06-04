@@ -33,12 +33,12 @@ class Nep_Tok:
         return self.tokenizer.get_vocab_size()
 
     def return_da_tokenizer_object(self):
-        return self.tokenizer.copy()
+        return self.tokenizer
     
-tok = Nep_Tok()
-a=tok.return_da_tokenizer_object()
-tok.add_tokens(['<s>', '</s>'])
-print(tok.get_vocab_size())
-print(tok.decode(tok.encode('<s> यो एउटा नेपाली टोकनाइजर हो। </s>', return_tokens=False)))
-print(a.get_vocab_size())
+# tok = Nep_Tok()
+# a=tok.return_da_tokenizer_object()
+# tok.add_tokens(['<s>', '</s>'])
+# print(tok.get_vocab_size())
+# print(tok.decode(tok.encode('<s> यो एउटा नेपाली टोकनाइजर हो। </s>', return_tokens=False)))
+# print(a.get_vocab_size())
 
