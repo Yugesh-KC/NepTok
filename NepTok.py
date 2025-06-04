@@ -3,8 +3,7 @@ from tokenizers import ByteLevelBPETokenizer
 
 class Nep_Tok:
     def __init__(self):
-        tokenizer=ByteLevelBPETokenizer()
-        self.tokenizer = tokenizer.from_file("model/vocab.json", "model/merges.txt")
+        self.tokenizer = ByteLevelBPETokenizer.from_file("model/vocab.json", "model/merges.txt")
 
     
     def encode(self,text,return_tokens=False,return_encode_obj=False):
@@ -23,15 +22,23 @@ class Nep_Tok:
         
         return ids
         
-    def decode(self,ids):
-        return self.tokenizer.decode(ids)
+    def decode(self,ids,skip_special_tokens=False,strict=False):
+        return self.tokenizer.decode(ids,skip_special_tokens=skip_special_tokens)
     
     def add_tokens(self,tokens_list):
         self.tokenizer.add_special_tokens(tokens_list)
         
 
+    def get_vocab_size(self):
+        return self.tokenizer.get_vocab_size()
 
+    def return_da_tokenizer_object(self):
+        return self.tokenizer.copy()
+    
+tok = Nep_Tok()
+a=tok.return_da_tokenizer_object()
+tok.add_tokens(['<s>', '</s>'])
+print(tok.get_vocab_size())
+print(tok.decode(tok.encode('<s> यो एउटा नेपाली टोकनाइजर हो। </s>', return_tokens=False)))
+print(a.get_vocab_size())
 
-tok=Nep_Tok()
-tok.add_tokens(['<s>','</s>'])
-print(tok.encode('<s> यो एउटा नेपाली टोकनाइजर हो। </s>',return_tokens=True))
